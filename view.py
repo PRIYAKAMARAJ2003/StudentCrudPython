@@ -14,10 +14,10 @@ class StudentView:
         else:
             print("Student not found.")
 
-    def get_student_input(self):
+    def get_student_input(self, existing_emails):
         name = self.get_valid_name("Enter student name: ")
         department = self.get_valid_department("Enter student department: ")
-        email = self.get_valid_email("Enter student email: ")
+        email = self.get_valid_email("Enter student email: ", existing_emails)
         phone_number = self.get_valid_phone_number("Enter student phone number: ")
         dob = self.get_valid_dob("Enter student date of birth (YYYY-MM-DD): ")
         age = self.calculate_age(dob)
@@ -54,11 +54,14 @@ class StudentView:
             else:
                 print("Invalid department. Department should only contain alphabets and spaces.")
 
-    def get_valid_email(self, prompt):
+    def get_valid_email(self, prompt, existing_emails):
         while True:
             email = input(prompt)
             if re.match(r"[^@]+@[^@]+\.[^@]+", email) and email.endswith("@gmail.com"):
-                return email
+                if email not in existing_emails:
+                    return email
+                else:
+                    print("Email already exists. Please enter a unique email.")
             else:
                 print("Invalid email. Email should be in the format example@gmail.com")
 
