@@ -7,6 +7,7 @@ class StudentController:
         self.view = StudentView()
 
     def show_menu(self):
+        existing_emails = [student.email for student in self.model.get_all_students()]  # Get existing emails
         while True:
             self.view.show_menu()
             choice = input("Enter your choice: ")
@@ -17,12 +18,12 @@ class StudentController:
                 student = self.model.get_student_by_email(email)
                 self.view.show_student(student)
             elif choice == '3':
-                name, department, email, phone_number, dob, age = self.view.get_student_input()
+                name, department, email, phone_number, dob, age = self.view.get_student_input(existing_emails)
                 student = Student(name, department, email, phone_number, dob, age)
                 self.model.add_student(student)
             elif choice == '4':
                 email = self.view.get_student_email("Enter student email: ")
-                updated_student = Student(*self.view.get_student_input())
+                updated_student = Student(*self.view.get_student_input(existing_emails))
                 if self.model.update_student(email, updated_student):
                     print("Student details updated successfully.")
                 else:
@@ -33,13 +34,13 @@ class StudentController:
                     print("Student deleted successfully.")
                 else:
                     print("Failed to delete student. Student email not found.")
-            elif choice == '6':
+            elif choice == '6':  # New option for deleting students by department
                 department = input("Enter department to delete: ")
                 if self.model.delete_students_by_department(department):
                     print("Students in the department deleted successfully.")
                 else:
                     print("No students found in the given department.")
-            elif choice == '7':
+            elif choice == '7':  # Exit option
                 print("Exiting the program.")
                 break
             else:
