@@ -1,4 +1,5 @@
 import re
+from datetime import datetime
 
 class StudentView:
     def show_all_students(self, students):
@@ -18,8 +19,8 @@ class StudentView:
         department = self.get_valid_department("Enter student department: ")
         email = self.get_valid_email("Enter student email: ")
         phone_number = self.get_valid_phone_number("Enter student phone number: ")
-        dob = input("Enter student date of birth (YYYY-MM-DD): ")
-        age = input("Enter student age: ")
+        dob = self.get_valid_dob("Enter student date of birth (YYYY-MM-DD): ")
+        age = self.calculate_age(dob)
         return name, department, email, phone_number, dob, age
 
     def get_student_id(self):
@@ -68,3 +69,21 @@ class StudentView:
                 return phone_number
             else:
                 print("Invalid phone number. Phone number should be 10 digits.")
+
+    def get_valid_dob(self, prompt):
+        while True:
+            dob = input(prompt)
+            try:
+                dob_date = datetime.strptime(dob, "%Y-%m-%d")
+                if self.calculate_age(dob) >= 18:
+                    return dob
+                else:
+                    print("Invalid date of birth. Age should be 18 or older.")
+            except ValueError:
+                print("Invalid date of birth format. Please use YYYY-MM-DD.")
+
+    def calculate_age(self, dob):
+        dob_date = datetime.strptime(dob, "%Y-%m-%d")
+        today = datetime.today()
+        age = today.year - dob_date.year - ((today.month, today.day) < (dob_date.month, dob_date.day))
+        return age
