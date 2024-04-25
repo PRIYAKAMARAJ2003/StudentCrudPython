@@ -3,16 +3,20 @@ from datetime import datetime
 
 class StudentView:
     def show_all_students(self, students):
-        print("----- All Students -----")
+        print("ID    | Name            | Department | Email                  | Phone Number | DOB         | Age")
+        print("-" * 90)  # Line separator
         for student in students:
-            print(f"ID: {student.id}, Name: {student.name}, Department: {student.department}, Email: {student.email}, Phone Number: {student.phone_number}, DOB: {student.dob}, Age: {student.age}")
+            print(f"{student.id:<6}| {student.name:<16}| {student.department:<11}| {student.email:<23}| {student.phone_number:<13}| {student.dob:<12}| {student.age}")
 
     def show_student(self, student):
         if student:
             print("----- Student Details -----")
-            print(f"ID: {student.id}, Name: {student.name}, Department: {student.department}, Email: {student.email}, Phone Number: {student.phone_number}, DOB: {student.dob}, Age: {student.age}")
+            print("ID    | Name            | Department | Email                  | Phone Number | DOB         | Age")
+            print("-" * 90)  # Line separator
+            print(f"{student.id:<6}| {student.name:<16}| {student.department:<11}| {student.email:<23}| {student.phone_number:<13}| {student.dob:<12}| {student.age}")
         else:
             print("Student not found.")
+
 
     def get_student_input(self, existing_emails):
         name = self.get_valid_name("Enter student name: ")
