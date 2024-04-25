@@ -4,7 +4,7 @@ from datetime import datetime
 class StudentView:
     def show_all_students(self, students):
         print("ID    | Name            | Department | Email                  | Phone Number | DOB         | Age")
-        print("-" * 90)  # Line separator
+        print("-" * 100)  # Line separator
         for student in students:
             print(f"{student.id:<6}| {student.name:<16}| {student.department:<11}| {student.email:<23}| {student.phone_number:<13}| {student.dob:<12}| {student.age}")
 
@@ -12,7 +12,7 @@ class StudentView:
         if student:
             print("----- Student Details -----")
             print("ID    | Name            | Department | Email                  | Phone Number | DOB         | Age")
-            print("-" * 90)  # Line separator
+            print("-" * 100)  # Line separator
             print(f"{student.id:<6}| {student.name:<16}| {student.department:<11}| {student.email:<23}| {student.phone_number:<13}| {student.dob:<12}| {student.age}")
         else:
             print("Student not found.")
