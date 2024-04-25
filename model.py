@@ -74,3 +74,12 @@ class StudentModel:
             if student.email == student_email:
                 return student
         return None
+
+    def delete_students_by_department(self, department):
+        students_to_delete = [student for student in self.students if student.department == department]
+        if students_to_delete:
+            self.students = [student for student in self.students if student not in students_to_delete]
+            self.save_data()
+            return True
+        else:
+            return False

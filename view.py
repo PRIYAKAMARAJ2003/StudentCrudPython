@@ -34,13 +34,15 @@ class StudentView:
         return input(prompt)
 
     def show_menu(self):
-        print("\n===== Student Management System =====")
+        print("\n===== Student CRUD =====")
         print("1. View All Students")
         print("2. View Student Details")
         print("3. Add New Student")
         print("4. Update Student Details")
         print("5. Delete Student")
-        print("6. Exit")
+        print("6. Delete Students by Department")  # New option
+        print("7. Exit")  # Adjusted option
+
 
     def get_valid_name(self, prompt):
         while True:

@@ -17,39 +17,33 @@ class StudentController:
                 student = self.model.get_student_by_email(email)
                 self.view.show_student(student)
             elif choice == '3':
-                existing_emails = [student.email for student in self.model.get_all_students()]
-                name, department, email, phone_number, dob, age = self.view.get_student_input(existing_emails)
+                name, department, email, phone_number, dob, age = self.view.get_student_input()
                 student = Student(name, department, email, phone_number, dob, age)
-                if email not in existing_emails:
-                    self.model.add_student(student)
-                    print("Student added successfully.")
-                else:
-                    print("Failed to add student. Email already exists.")
+                self.model.add_student(student)
             elif choice == '4':
                 email = self.view.get_student_email("Enter student email: ")
                 updated_student = Student(*self.view.get_student_input())
-                if email not in [student.email for student in self.model.get_all_students()]:
-                    if self.model.update_student(email, updated_student):
-                        print("Student details updated successfully.")
-                    else:
-                        print("Failed to update student details. Student email not found.")
+                if self.model.update_student(email, updated_student):
+                    print("Student details updated successfully.")
                 else:
-                    print("Failed to update student details. Email already exists.")
+                    print("Failed to update student details. Student email not found.")
             elif choice == '5':
                 email = self.view.get_student_email("Enter student email: ")
-                if email not in [student.email for student in self.model.get_all_students()]:
-                    if self.model.delete_student(email):
-                        print("Student deleted successfully.")
-                    else:
-                        print("Failed to delete student. Student email not found.")
+                if self.model.delete_student(email):
+                    print("Student deleted successfully.")
                 else:
-                    print("Failed to delete student. Email already exists.")
+                    print("Failed to delete student. Student email not found.")
             elif choice == '6':
+                department = input("Enter department to delete: ")
+                if self.model.delete_students_by_department(department):
+                    print("Students in the department deleted successfully.")
+                else:
+                    print("No students found in the given department.")
+            elif choice == '7':
                 print("Exiting the program.")
                 break
             else:
                 print("Invalid choice. Please enter a valid option.")
-
 if __name__ == "__main__":
     controller = StudentController()
     controller.show_menu()
