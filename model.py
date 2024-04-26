@@ -28,7 +28,6 @@ class StudentModel:
                     student.id = int(row[0])
                     self.students.append(student)
 
-    # Decorate the method with LRU cache to cache the result
     @lru_cache(maxsize=None)
     def get_all_students(self):
         return self.students
@@ -40,17 +39,20 @@ class StudentModel:
             for student in self.students:
                 writer.writerow([student.id, student.name, student.department, student.email, student.phone_number, student.dob, student.age])
 
+    @lru_cache(maxsize=None)
     def generate_id(self):
         if not self.students:
             return 1
         else:
             return self.students[-1].id + 1
 
+    @lru_cache(maxsize=None)
     def add_student(self, student):
         student.id = self.generate_id()
         self.students.append(student)
         self.save_data()
 
+    @lru_cache(maxsize=None)
     def update_student(self, student_email, updated_student):
         for student in self.students:
             if student.email == student_email:
@@ -64,6 +66,7 @@ class StudentModel:
                 return True
         return False
 
+    @lru_cache(maxsize=None)
     def delete_student(self, student_email):
         for student in self.students:
             if student.email == student_email:
@@ -72,15 +75,18 @@ class StudentModel:
                 return True
         return False
 
+    @lru_cache(maxsize=None)
     def get_all_students(self):
         return self.students
 
+    @lru_cache(maxsize=None)
     def get_student_by_email(self, student_email):
         for student in self.students:
             if student.email == student_email:
                 return student
         return None
 
+    @lru_cache(maxsize=None)
     def delete_students_by_department(self, department):
         students_to_delete = [student for student in self.students if student.department == department]
         if students_to_delete:
@@ -90,6 +96,7 @@ class StudentModel:
         else:
             return False
 
+    @lru_cache(maxsize=None)
     def delete_students_by_id_range(self, start_id, end_id):
         students_to_delete = [student for student in self.students if start_id <= student.id <= end_id]
         if students_to_delete:
