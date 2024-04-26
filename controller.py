@@ -34,17 +34,25 @@ class StudentController:
                     print("Student deleted successfully.")
                 else:
                     print("Failed to delete student. Student email not found.")
-            elif choice == '6':  # New option for deleting students by department
+            elif choice == '6':  # Delete students by department
                 department = input("Enter department to delete: ")
                 if self.model.delete_students_by_department(department):
                     print("Students in the department deleted successfully.")
                 else:
                     print("No students found in the given department.")
-            elif choice == '7':  # Exit option
+            elif choice == '7':  # Delete students by ID range
+                start_id = int(input("Enter start ID for range delete: "))
+                end_id = int(input("Enter end ID for range delete: "))
+                if self.model.delete_students_by_id_range(start_id, end_id):
+                    print("Students in the specified ID range deleted successfully.")
+                else:
+                    print("No students found in the specified ID range.")
+            elif choice == '8':  # Exit option
                 print("Exiting the program.")
                 break
             else:
                 print("Invalid choice. Please enter a valid option.")
+
 if __name__ == "__main__":
     controller = StudentController()
     controller.show_menu()

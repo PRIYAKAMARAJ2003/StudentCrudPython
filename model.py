@@ -89,3 +89,12 @@ class StudentModel:
             return True
         else:
             return False
+
+    def delete_students_by_id_range(self, start_id, end_id):
+        students_to_delete = [student for student in self.students if start_id <= student.id <= end_id]
+        if students_to_delete:
+            self.students = [student for student in self.students if student not in students_to_delete]
+            self.save_data()
+            return True
+        else:
+            return False

@@ -41,7 +41,8 @@ class StudentView:
         print("4. Update Student Details")
         print("5. Delete Student")
         print("6. Delete Students by Department")  # New option
-        print("7. Exit")  # Adjusted option
+        print("7. Delete Students by Range")
+        print("8. Exit")  # Adjusted option
 
 
     def get_valid_name(self, prompt):
