@@ -1,5 +1,6 @@
 import csv
 import os
+from functools import lru_cache
 
 class Student:
     def __init__(self, name, department, email, phone_number, dob, age):
@@ -26,6 +27,11 @@ class StudentModel:
                     student = Student(*row[1:])
                     student.id = int(row[0])
                     self.students.append(student)
+
+    # Decorate the method with LRU cache to cache the result
+    @lru_cache(maxsize=None)
+    def get_all_students(self):
+        return self.students
 
     def save_data(self):
         with open(self.file_path, 'w', newline='') as file:

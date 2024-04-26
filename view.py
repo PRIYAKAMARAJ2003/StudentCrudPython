@@ -84,12 +84,14 @@ class StudentView:
             dob = input(prompt)
             try:
                 dob_date = datetime.strptime(dob, "%Y-%m-%d")
-                if self.calculate_age(dob) >= 18:
+                age = self.calculate_age(dob)
+                if 18 <= age <= 22:
                     return dob
                 else:
-                    print("Invalid date of birth. Age should be 18 or older.")
+                    print("Invalid date of birth. Age should be between 18 and 22.")
             except ValueError:
                 print("Invalid date of birth format. Please use YYYY-MM-DD.")
+
 
     def calculate_age(self, dob):
         dob_date = datetime.strptime(dob, "%Y-%m-%d")
