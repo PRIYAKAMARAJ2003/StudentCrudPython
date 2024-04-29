@@ -1,6 +1,7 @@
 import csv
 import os
 from functools import lru_cache
+from datetime import datetime
 
 class Student:
     def __init__(self, name, department, email, phone_number, dob, age):
@@ -105,3 +106,14 @@ class StudentModel:
             return True
         else:
             return False
+
+    @lru_cache(maxsize=None)
+    def delete_students_by_dob_year_range(self, start_year, end_year):
+        students_to_delete = [student for student in self.students if start_year <= datetime.strptime(student.dob, "%Y-%m-%d").year <= end_year]
+        if students_to_delete:
+            self.students = [student for student in self.students if student not in students_to_delete]
+            self.save_data()
+            return True
+        else:
+            return False
+    

@@ -2,10 +2,14 @@ import re
 from datetime import datetime
 
 class StudentView:
-    def show_all_students(self, students):
+    def show_all_students(self, students, page_number, page_size):
+        start_index = (page_number - 1) * page_size
+        end_index = start_index + page_size
+        students_to_display = students[start_index:end_index]
+
         print("ID    | Name            | Department | Email                  | Phone Number | DOB         | Age")
         print("-" * 100)  # Line separator
-        for student in students:
+        for student in students_to_display:
             print(f"{student.id:<6}| {student.name:<16}| {student.department:<11}| {student.email:<23}| {student.phone_number:<13}| {student.dob:<12}| {student.age}")
 
     def show_student(self, student):
@@ -17,6 +21,8 @@ class StudentView:
         else:
             print("Student not found.")
 
+    def show_pagination(self, page_number, total_pages):
+        print(f"Page {page_number}/{total_pages}")
 
     def get_student_input(self, existing_emails):
         name = self.get_valid_name("Enter student name: ")
@@ -40,10 +46,12 @@ class StudentView:
         print("3. Add New Student")
         print("4. Update Student Details")
         print("5. Delete Student")
-        print("6. Delete Students by Department")  # New option
+        print("6. Delete Students by Department")
         print("7. Delete Students by Range")
-        print("8. Exit")  # Adjusted option
-
+        print("8. Delete Students by DOB Year Range")  # New option
+        print("9. Exit")
+        print("10. Next Page")
+        print("11. Previous Page")
 
     def get_valid_name(self, prompt):
         while True:
@@ -92,7 +100,6 @@ class StudentView:
                     print("Invalid date of birth. Age should be between 18 and 22.")
             except ValueError:
                 print("Invalid date of birth format. Please use YYYY-MM-DD.")
-
 
     def calculate_age(self, dob):
         dob_date = datetime.strptime(dob, "%Y-%m-%d")
