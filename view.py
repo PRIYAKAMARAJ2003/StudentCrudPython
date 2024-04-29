@@ -43,15 +43,16 @@ class StudentView:
         print("\n===== Student CRUD =====")
         print("1. View All Students")
         print("2. View Student Details")
-        print("3. Add New Student")
-        print("4. Update Student Details")
-        print("5. Delete Student")
-        print("6. Delete Students by Department")
-        print("7. Delete Students by Range")
-        print("8. Delete Students by DOB Year Range")  # New option
-        print("9. Exit")
-        print("10. Next Page")
-        print("11. Previous Page")
+        print("3. View Students by ID Range")  # Updated option
+        print("4. Add New Student")
+        print("5. Update Student Details")
+        print("6. Delete Student")
+        print("7. Delete Students by Department")
+        print("8. Delete Students by Range")
+        print("9. Delete Students by DOB Year Range")  # New option
+        print("10. Exit")
+        print("11. Next Page")
+        print("12. Previous Page")  # Updated option
 
     def get_valid_name(self, prompt):
         while True:
