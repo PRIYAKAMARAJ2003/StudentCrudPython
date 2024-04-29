@@ -117,7 +117,6 @@ class StudentModel:
         else:
             return False
     
-    
     @lru_cache(maxsize=None)
     def get_students_by_id_range(self, start_id, end_id):
         students_within_range = [student for student in self.students if start_id <= student.id <= end_id]
