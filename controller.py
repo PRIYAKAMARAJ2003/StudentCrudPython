@@ -5,7 +5,7 @@ class StudentController:
     def __init__(self):
         self.model = StudentModel()
         self.view = StudentView()
-        self.page_size = 5
+        self.page_size = 2
         self.current_page = 1
 
     def show_menu(self):
